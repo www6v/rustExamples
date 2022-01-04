@@ -26,4 +26,3 @@ fn fetch() {
     fs::write(output, md.as_bytes()).unwrap();  
 }
 
-    
