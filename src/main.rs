@@ -6,6 +6,8 @@ use std::fs;
 use hello_rust::base::base::copyTest;
 use hello_rust::base::base::moveTest;
 use hello_rust::base::base::borrowTest;
+use hello_rust::base::rc::rcTest;
+
 
 fn main() {
     let stdout = stdout();
@@ -15,11 +17,14 @@ fn main() {
     let mut writer = BufWriter::new(stdout.lock());
     say(message.as_bytes(), width, &mut writer).unwrap();
 
+
+
     fetchIgnoreError();
     fetchWithError();
     copyTest();
     moveTest();
     borrowTest();
+    rcTest();
 
     println!("hello in english :{}", hello_rust::english::greeting::hello());
     println!("hello in chinese :{}", hello_rust::chinese::greeting::hello());
