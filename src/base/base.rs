@@ -1,9 +1,9 @@
 
-fn main() {
-    copyTest();
-    moveTest();
-    borrowTest();
-}
+// fn main() {
+//     copyTest();
+//     moveTest();
+//     borrowTest();
+// }
 
 pub fn moveTest() {
     let data = vec![1, 2, 3, 4];
