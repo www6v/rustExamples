@@ -1,9 +1,4 @@
-
-// fn main() {
-//     copyTest();
-//     moveTest();
-//     borrowTest();
-// }
+use std::fs;
 
 pub fn moveTest() {
     let data = vec![1, 2, 3, 4];
@@ -82,4 +77,30 @@ fn sum1(data: &Vec<u32>) -> u32 {
     println!("addr of value: {:p}, addr of ref: {:p}", data, &data); 
     data.iter().fold(0, |acc, x| acc + x) 
 }
+
+
+pub fn fetchIgnoreError() {
+    let url = "https://www.rust-lang.org/";
+    let output = "rust.md";
     
+    println!("Fetching url: {}", url);
+    let body = reqwest::blocking::get(url).unwrap().text().unwrap();
+    
+    println!("Converting html to markdown...");
+    let md = html2md::parse_html(&body);
+    
+    fs::write(output, md.as_bytes()).unwrap();  
+}
+
+
+pub fn fetchWithError() -> Result<(), Box<dyn std::error::Error>> { 
+    let url = "https://www.rust-lang.org/"; 
+    let output = "rust.md"; 
+    println!("Fetching url: {}", url); 
+    let body = reqwest::blocking::get(url)?.text()?; 
+    println!("Converting html to markdown..."); 
+    let md = html2md::parse_html(&body); 
+    fs::write(output, md.as_bytes())?; 
+    println!("Converted markdown has been saved in {}.", output); 
+    Ok(()) 
+}

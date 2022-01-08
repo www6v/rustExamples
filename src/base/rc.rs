@@ -34,7 +34,6 @@ pub fn rcTest() {
     println!("node1: {:?}, node2: {:?}", node1, node2); 
     let node5 = Node::new(5); 
     let node3 = node1.get_downstream().unwrap(); 
-    // èŽ·å¾—å¯å˜å¼•ç”¨ï¼Œæ¥ä¿®æ”¹ downstream 
     node3.borrow_mut().downstream = Some(Rc::new(RefCell::new(node5))); 
     println!("node1: {:?}, node2: {:?}", node1, node2); 
 }
