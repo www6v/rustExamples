@@ -23,7 +23,7 @@ pub fn get_downstream(&self) -> Option<Rc<RefCell<Node>>> {
 } 
 }
 
-pub fn rcTest() { 
+pub fn rc_test() { 
     let mut node1 = Node::new(1); 
     let mut node2 = Node::new(2); 
     let mut node3 = Node::new(3); 

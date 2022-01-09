@@ -1,6 +1,30 @@
-use std::fs;
+// extern crate hello_rust;
+use crate::english;
+use crate::chinese;
 
-pub fn moveTest() {
+use std::fs;
+use ferris_says::say; // from the previous step
+use std::io::{stdout, BufWriter};
+
+pub fn module_test() {
+    println!("hello in english :{}", english::greeting::hello());
+    println!("hello in chinese :{}", chinese::greeting::hello());
+
+    println!("firewall in english :{}", english::farewells::goodbye());
+    println!("firewall in chinese :{}", chinese::farewells::goodbye());
+}
+
+pub fn say_hi_test() {
+    let stdout = stdout();
+    let message = String::from("Hello fellow Rustaceans!");
+    let width = message.chars().count();
+
+    let mut writer = BufWriter::new(stdout.lock());
+    say(message.as_bytes(), width, &mut writer).unwrap();
+}
+
+
+pub fn move_test() {
     let data = vec![1, 2, 3, 4];
     let data1 = data;
     println!("sum of data1: {}", sum(data1));
@@ -52,12 +76,12 @@ fn types_impl_copy_trait() {
 //     is_copy::<(String, u32)>(); 
 // }
 
-pub fn copyTest() { 
+pub fn copy_test() { 
     types_impl_copy_trait(); 
     // types_not_impl_copy_trait(); 
 } 
 
-pub fn borrowTest() { 
+pub fn borrow_test() { 
     let data = vec![1, 2, 3, 4]; 
     let data1 = &data; 
 
@@ -79,7 +103,7 @@ fn sum1(data: &Vec<u32>) -> u32 {
 }
 
 
-pub fn fetchIgnoreError() {
+pub fn fetch_ignore_error() {
     let url = "https://www.rust-lang.org/";
     let output = "rust.md";
     

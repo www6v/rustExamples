@@ -1,46 +1,36 @@
-extern crate hello_rust;
-
-use ferris_says::say; // from the previous step
-use std::io::{stdout, BufWriter};
-use hello_rust::base::base::copyTest;
-use hello_rust::base::base::moveTest;
-use hello_rust::base::base::borrowTest;
-use hello_rust::base::base::fetchIgnoreError;
+use hello_rust::base::base::say_hi_test;
+use hello_rust::base::base::module_test;
+use hello_rust::base::base::copy_test;
+use hello_rust::base::base::move_test;
+use hello_rust::base::base::borrow_test;
+use hello_rust::base::base::fetch_ignore_error;
 use hello_rust::base::base::fetch_with_error;
-use hello_rust::base::rc::rcTest;
+use hello_rust::base::rc::rc_test;
 
-fn main() {
-    sayHiTest();
-    moduleTest();
+// fn main() {
+// }
 
-    fetchIgnoreError();
-    fetch_with_error();
-    copyTest();
-    moveTest();
-    borrowTest();
-    rcTest();
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_stable() {
+        say_hi_test();
+        module_test();
+        fetch_ignore_error();
+        fetch_with_error();
+        copy_test();
+        move_test();
+        borrow_test();
+        rc_test();
+    }
+
+    #[test]
+    fn test_in_prograss() {
+      
+    }
 }
-
-fn moduleTest() {
-    println!("hello in english :{}", hello_rust::english::greeting::hello());
-    println!("hello in chinese :{}", hello_rust::chinese::greeting::hello());
-
-    println!("firewall in english :{}", hello_rust::english::farewells::goodbye());
-    println!("firewall in chinese :{}", hello_rust::chinese::farewells::goodbye());
-}
-
-fn sayHiTest() {
-    let stdout = stdout();
-    let message = String::from("Hello fellow Rustaceans!");
-    let width = message.chars().count();
-
-    let mut writer = BufWriter::new(stdout.lock());
-    say(message.as_bytes(), width, &mut writer).unwrap();
-}
-
-
-
-
 
 
 

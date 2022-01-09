@@ -6,7 +6,7 @@ use tokio_util::codec::{Framed, LengthDelimitedCodec};
 
 
 #[tokio::main] 
-async fn main() -> Result<()> { 
+pub async fn server() -> Result<()> { 
     let listener = TcpListener::bind("127.0.0.1:9527").await?; 
     loop {
         let (stream, addr) = listener.accept().await?; 
