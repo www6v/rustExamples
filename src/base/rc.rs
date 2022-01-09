@@ -28,10 +28,12 @@ pub fn rc_test() {
     let mut node2 = Node::new(2); 
     let mut node3 = Node::new(3); 
     let node4 = Node::new(4); 
+    
     node3.update_downstream(Rc::new(RefCell::new(node4))); 
     node1.update_downstream(Rc::new(RefCell::new(node3))); 
     node2.update_downstream(node1.get_downstream().unwrap()); 
     println!("node1: {:?}, node2: {:?}", node1, node2); 
+
     let node5 = Node::new(5); 
     let node3 = node1.get_downstream().unwrap(); 
     node3.borrow_mut().downstream = Some(Rc::new(RefCell::new(node5))); 

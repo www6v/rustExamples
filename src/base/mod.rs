@@ -4,3 +4,4 @@ pub mod rc;
 pub mod rocket;
 pub mod tokioserver;
 pub mod tokioclient;
+pub mod trait_mod;
