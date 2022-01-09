@@ -8,8 +8,8 @@ use hello_rust::base::base::fetch_ignore_error;
 use hello_rust::base::base::fetch_with_error;
 use hello_rust::base::rc::rc_test;
 
-// fn main() {
-// }
+fn main() {
+}
 
 #[cfg(test)]
 mod tests {
