@@ -93,7 +93,7 @@ pub fn fetchIgnoreError() {
 }
 
 
-pub fn fetchWithError() -> Result<(), Box<dyn std::error::Error>> { 
+pub fn fetch_with_error() -> Result<(), Box<dyn std::error::Error>> { 
     let url = "https://www.rust-lang.org/"; 
     let output = "rust.md"; 
     println!("Fetching url: {}", url); 

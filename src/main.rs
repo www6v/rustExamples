@@ -6,16 +6,15 @@ use hello_rust::base::base::copyTest;
 use hello_rust::base::base::moveTest;
 use hello_rust::base::base::borrowTest;
 use hello_rust::base::base::fetchIgnoreError;
-use hello_rust::base::base::fetchWithError;
+use hello_rust::base::base::fetch_with_error;
 use hello_rust::base::rc::rcTest;
-use hello_rust::base::rc;
 
 fn main() {
     sayHiTest();
     moduleTest();
 
     fetchIgnoreError();
-    fetchWithError();
+    fetch_with_error();
     copyTest();
     moveTest();
     borrowTest();
