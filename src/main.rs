@@ -3,6 +3,8 @@
 use hello_rust::base::rc::rc_test;
 use hello_rust::base::trait_mod::copy_trait_test;
 use hello_rust::base::trait_mod::drop_trait_test;
+use hello_rust::base::trait_mod::refcell_is_send;
+use hello_rust::base::trait_mod::arc_mutext_is_send_sync;
 
 use hello_rust::base::base::Base;
 
@@ -33,6 +35,8 @@ mod tests {
     fn test_in_prograss() {
         copy_trait_test();
         drop_trait_test();
+        refcell_is_send();
+        arc_mutext_is_send_sync();
     }
 }
 

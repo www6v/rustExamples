@@ -1,4 +1,12 @@
  
+use std::thread;
+use std::rc::Rc;
+use std::cell::RefCell; 
+
+use std::{
+    sync::{Arc, Mutex}
+};
+
 #[derive(Clone, Debug)]
 struct Developer {
   name: String,
@@ -98,4 +106,59 @@ fn use_buffer(buf: RawBuffer) {
    println!("buf to die: {:?}", buf);  
    drop(buf) 
 }
+
+
+/// 如果在线程间传递 Rc，是无法编译通过的，因为Rc 的实现不支持 Send 和 Sync。
+/// Rc 既不是 Send，也不是 Sync
+//  fn rc_is_not_send_and_sync() {  
+//    let a = Rc::new(1);
+//    let b = a.clone();
+//    let c = a.clone();
+//    thread::spawn(move || {
+//        println!("c= {:?}", c);
+//    });
+// }
+
+/// RefCell 实现了 Send，但没有实现 Sync，所以，看起来是可以工作的
+pub fn refcell_is_send() {
+   let a = RefCell::new(1);
+   thread::spawn(move || {
+        println!("a= {:?}", a);
+   });
+}
+
+// RefCell 现在有多个 Arc 持有它，虽然 Arc 是 Send/Sync，但 RefCell 不是 Sync
+//  fn refcell_is_not_sync() {
+//    let a = Arc::new(RefCell::new(1));
+//    let b = a.clone();
+//    let c = a.clone();
+//    thread::spawn(move || {
+//        println!("c= {:?}", c);
+//    });
+// }
+
+
+// Arc<Mutext<T>> 可以多线程共享且修改数据
+pub fn arc_mutext_is_send_sync() {
+   let a = Arc::new(Mutex::new(1));
+   let b = a.clone();
+   let c = a.clone();
+   let handle = thread::spawn(move || {   
+      let mut g = c.lock().unwrap();
+      *g += 1; 
+   });
+
+   {
+      let mut g = b.lock().unwrap();
+      *g += 1;
+   }
+          
+   handle.join().unwrap();
+   println!("a= {:?}", a);
+}
+
+      // fn main() {
+      //     arc_mutext_is_send_sync();
+      // }      
+
 
