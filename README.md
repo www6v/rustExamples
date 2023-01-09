@@ -1,2 +1,2 @@
-# rustDemo
-RUST Demo
+# rustExamples
+RUST Examples
